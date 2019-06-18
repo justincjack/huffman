@@ -176,7 +176,7 @@ int decompress(const uint8_t *input, int inlen, char **output, int outlen) {
                     break;
                 }
             } else {
-                return HUFFMAN_INTERNAL_ERROR; /* Encoding octet boundry error */
+                return HUFFMAN_INTERNAL_ERROR;
             }
         }
         if (i == HPACK_SIZE )  {
