@@ -23,6 +23,8 @@ extern "C" {
 #define HUFFMAN_NO_ERROR 0
 #define HUFFMAN_SUCCESS 1
     
+static int huffman_bits = (sizeof(int *) * 8);
+    
 static const struct _hpack_table {
     uint32_t value;
     uint32_t bits;
