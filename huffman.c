@@ -5,17 +5,22 @@ void huffman_zero_mem( void *ptr, size_t length ) {
     
     union _hmzs_ {
         void *_void;
-        char *_char;
-        short *_short;
-        long *_long;
-    } zs = {ptr};
+        uint8_t *_char;
+        uint16_t *_short;
+        uint32_t *_long;
+        uint64_t *_ull;
+    } zs = {
+        ._void = ptr
+    };
     
-    if ( length % 4 == 0) {
-        for (; i < length/4; i++) zs._long[i] = 0x00000000L;
+    if ( length % 8 == 0 && huffman_bits == 64) {
+        for (; i < length/8; i++) zs._ull[i] = (uint64_t)0x0000000000000000;
+    } else if (length % 4 == 0) {
+        for (; i < length/4; i++) zs._long[i] = (uint32_t)0x00000000;
     } else if (length % 2 == 0) {
-        for (; i < length/2; i++) zs._short[i] = (short)0x0000;
+        for (; i < length/2; i++) zs._short[i] = (uint16_t)0x0000;
     } else {
-        for (; i < length; i++) zs._char[i] = (char)0x00;;
+        for (; i < length; i++) zs._char[i] = (uint8_t)0x00;;
     }
     return;
 }
